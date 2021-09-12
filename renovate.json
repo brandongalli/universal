@@ -1,0 +1,52 @@
+{
+  "pinVersions": false,
+  "semanticCommits": true,
+  "semanticPrefix": "build",
+  "separateMajorMinor": false,
+  "prHourlyLimit": 2,
+  "labels": ["target: minor", "action: merge"],
+  "timezone": "America/Tijuana",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "schedule": ["after 10pm every weekday", "before 4am every weekday", "every weekend"],
+  "baseBranches": ["master"],
+  "ignoreDeps": ["@types/node"],
+  "includePaths": [
+    "WORKSPACE",
+    "package.json",
+    "modules/**/package.json",
+    "integration/**/package.json",
+    ".github/workflows/**/*.yml"
+  ],
+  "ignorePaths": ["modules/builders/testing/**"],
+  "packageRules": [
+    {
+      "packagePatterns": ["^@angular/.*", "^@angular-devkit/.*", "^@schematics/.*", "angular/dev-infra"],
+      "groupName": "angular",
+      "pinVersions": false
+    },
+    {
+      "packagePatterns": ["^@bazel/.*", "^build_bazel.*", "^bazel_toolchains$"],
+      "groupName": "bazel",
+      "pinVersions": false
+    },
+    {
+      "packageNames": ["typescript"],
+      "separateMinorPatch": true
+    },
+    {
+      "packageNames": ["typescript"],
+      "updateTypes": ["minor", "major"],
+      "enabled": false
+    },
+    {
+      "matchCurrentVersion": "0.0.0-PLACEHOLDER",
+      "enabled": false
+    },
+    {
+      "matchCurrentVersion": "/_VERSION$/",
+      "enabled": false
+    }
+  ]
+}
